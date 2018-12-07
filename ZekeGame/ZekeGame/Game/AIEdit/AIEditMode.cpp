@@ -24,6 +24,9 @@ bool AIEditMode::Start()
 
 	m_cursor = NewGO<GameCursor>(0, "cursor");
 
+	m_spriteRender = NewGO<SpriteRender>(1, "win");
+	m_spriteRender->Init(L"Assets/sprite/winkari.dds", 1280,1860);
+
 	//!!!--RETURN TRUE--!!!
 	return true;
 	//!!!--RETURN TRUE--!!!

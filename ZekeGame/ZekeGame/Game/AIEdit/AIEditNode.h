@@ -14,9 +14,9 @@ public:
 	bool Start() override final;
 	void Update() override final;
 	void SetPointPos(int numx, int numy);
-	//void PostReider(CRenderContext & rc);
-	
+	void PostRender() override final;
 
+	
 private:
 
 	GameCursor * m_gamecursor;
@@ -29,5 +29,7 @@ private:
 	SpriteRender * m_spriteRender5;
 	CVector3 m_position = CVector3::Zero();
 	CVector3 m_pointposition = CVector3::Zero();
+	CFont m_font;
 
+	std::vector<SpriteRender*> m_spriteRenders;
 };

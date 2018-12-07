@@ -28,6 +28,6 @@ private:
 	GameCursor* m_cursor = nullptr;				// This is cursor
 	GameCamera* m_camera = nullptr;				//<-THIS IS CAMERA
 	AIEditNode* m_aieditnode = nullptr;
-	
+	SpriteRender * m_spriteRender;
 
 };

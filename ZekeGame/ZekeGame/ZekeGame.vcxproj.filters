@@ -407,6 +407,9 @@
     <ClCompile Include="Game\AIEdit\AIEditNodeHp.cpp">
       <Filter>ソース ファイル\Game\AIEdit</Filter>
     </ClCompile>
+    <ClCompile Include="Game\AIEdit\AIEditNodeInequ.cpp">
+      <Filter>ソース ファイル\Game\AIEdit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\character\CharacterController.h">
@@ -989,6 +992,9 @@
       <Filter>ソース ファイル\Game\AIEdit</Filter>
     </ClInclude>
     <ClInclude Include="Game\AIEdit\AIEditNodeHp.h">
+      <Filter>ソース ファイル\Game\AIEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\AIEdit\AIEditNodeInequ.h">
       <Filter>ソース ファイル\Game\AIEdit</Filter>
     </ClInclude>
   </ItemGroup>

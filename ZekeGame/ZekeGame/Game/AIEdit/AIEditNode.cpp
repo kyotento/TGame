@@ -34,31 +34,52 @@ bool AIEditNode::Start()
 	m_spriteRender->SetPosition(m_position);			//カーソルの座標
 
 	//ボタン１～
-	SetPointPos(-70, 140);
-	m_spriteRender1= NewGO<SpriteRender>(2, "miniwin1");
-	m_spriteRender1->Init(L"Assets/sprite/Hp.dds", 140, 100, true);
-	m_spriteRender1->SetPosition(m_pointposition);
+	//SetPointPos(-70, 140);														//ボタンの座標指定
+	//m_spriteRender1= NewGO<SpriteRender>(2, "miniwin1");						//表示
+	//m_spriteRender1->Init(L"Assets/sprite/Hp.dds", 140, 100, true);				//画像のファイルパス
+	//m_spriteRender1->SetPosition(m_pointposition);								//座標セット
 
-	SetPointPos(70, 140);
-	m_spriteRender2 = NewGO<SpriteRender>(2, "miniwin2");
-	m_spriteRender2->Init(L"Assets/sprite/Mp.dds", 140, 100, true);
-	m_spriteRender2->SetPosition(m_pointposition);
+	//SetPointPos(70, 140);
+	//m_spriteRender2 = NewGO<SpriteRender>(2, "miniwin2");
+	//m_spriteRender2->Init(L"Assets/sprite/Mp.dds", 140, 100, true);
+	//m_spriteRender2->SetPosition(m_pointposition);
 
-	SetPointPos(-70, 40);
-	m_spriteRender3 = NewGO<SpriteRender>(2, "miniwin3");
-	m_spriteRender3->Init(L"Assets/sprite/karipoint.dds", 140, 100, true);
-	m_spriteRender3->SetPosition(m_pointposition);
+	//SetPointPos(-70, 40);
+	//m_spriteRender3 = NewGO<SpriteRender>(2, "miniwin3");
+	//m_spriteRender3->Init(L"Assets/sprite/karipoint.dds", 140, 100, true);
+	//m_spriteRender3->SetPosition(m_pointposition);
 
-	SetPointPos(70, 40);
-	m_spriteRender4 = NewGO<SpriteRender>(2, "miniwin4");
-	m_spriteRender4->Init(L"Assets/sprite/karipoint.dds", 140, 100, true);
-	m_spriteRender4->SetPosition(m_pointposition);
+	//SetPointPos(70, 40);
+	//m_spriteRender4 = NewGO<SpriteRender>(2, "miniwin4");
+	//m_spriteRender4->Init(L"Assets/sprite/karipoint.dds", 140, 100, true);
+	//m_spriteRender4->SetPosition(m_pointposition);
 
-	SetPointPos(-70, -40);
-	m_spriteRender5 = NewGO<SpriteRender>(2, "miniwin5");
-	m_spriteRender5->Init(L"Assets/sprite/karipoint.dds", 140, 100, true);
-	m_spriteRender5->SetPosition(m_pointposition);
+	//SetPointPos(-70, -40);
+	//m_spriteRender5 = NewGO<SpriteRender>(2, "miniwin5");
+	//m_spriteRender5->Init(L"Assets/sprite/karipoint.dds", 140, 100, true);
+	//m_spriteRender5->SetPosition(m_pointposition);
 
+	int x = 70;			//ボタンのX座標
+	int y = 240;		//ボタンのY座標
+	
+	//ボタン専用
+	for (int i = 0; i < 5; i++)		//iは数を回すだけのハム太郎
+	{
+		x *= -1;					
+
+		if (i % 2 == 0)
+		{
+			y -= 100;
+
+		}
+
+		SetPointPos(x,y);
+		SpriteRender* sr = NewGO<SpriteRender>(0, "miniwin");
+		sr->Init(L"Assets/sprite/karipoint.dds", 140, 100, true);
+		sr->SetPosition(m_pointposition);
+		m_spriteRenders.push_back(sr);
+		
+	}
 	return true;
 
 }
@@ -74,24 +95,18 @@ void AIEditNode::SetPointPos(int numx, int numy)
 	m_pointposition.x = x + numx;
 	m_pointposition.y = y + numy;
 
+
 }
-
-//void AIEditNode::PostReider(CRenderContext & rc)
-//{
-//
-//
-//
-//}
-
 
 void AIEditNode::Update()
 {
 	CVector3 cursorpos = m_gamecursor->GetCursor();
 
-	m_spriteRender1->SetCollisionTarget(cursorpos);
+	//m_spriteRender1->SetCollisionTarget(cursorpos);
+	m_spriteRenders[0]->SetCollisionTarget(cursorpos);
 
 
-		if (m_spriteRender1->isCollidingTarget())	//Hpを選択しているか	
+		if (m_spriteRenders[0]->isCollidingTarget())	//Hpを選択しているか	
 		{
 
 			if (Mouse::isTrigger(enLeftClick))	//右クリック
@@ -102,3 +117,14 @@ void AIEditNode::Update()
 	
 }
 
+void AIEditNode::PostRender()
+{
+	//for (int i = 0; i < 5; i++) {
+	//	m_font.Begin();
+	//	wchar_t text[256];
+	//	swprintf_s(text, L" HP ");
+
+	//	m_font.Draw(text, { 0 , 0 });
+	//	m_font.End();
+	//}
+}

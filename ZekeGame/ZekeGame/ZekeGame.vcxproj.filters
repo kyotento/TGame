@@ -470,6 +470,9 @@
     <ClCompile Include="Game\Title\MonsterSelect.cpp">
       <Filter>ソース ファイル\Game\Title</Filter>
     </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>ソース ファイル\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\character\CharacterController.h">
@@ -1082,6 +1085,9 @@
     </ClInclude>
     <ClInclude Include="Game\Title\MonsterSelect.h">
       <Filter>ソース ファイル\Game\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>ソース ファイル\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

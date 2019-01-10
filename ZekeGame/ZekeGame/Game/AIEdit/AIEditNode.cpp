@@ -7,16 +7,16 @@
 #include "../../GameCamera.h"
 
 #include "AIEditNodeHp.h"
-
+#include "AIEditNodeInequ.h"
 
 AIEditNode::~AIEditNode()
 {
 	DeleteGO(m_spriteRender);
-	DeleteGO(m_spriteRender1);
-	DeleteGO(m_spriteRender2);
-	DeleteGO(m_spriteRender3);
-	DeleteGO(m_spriteRender4);
-	DeleteGO(m_spriteRender5);
+	//DeleteGO(m_spriteRender1);
+	//DeleteGO(m_spriteRender2);
+	//DeleteGO(m_spriteRender3);
+	//DeleteGO(m_spriteRender4);
+	//DeleteGO(m_spriteRender5);
 }
 
 
@@ -28,7 +28,7 @@ bool AIEditNode::Start()
 
 	//UIの基盤
 	m_spriteRender = NewGO<SpriteRender>(3, "firstwin");
-	m_spriteRender->Init(L"Assets/sprite/winkari.dds", 300, 500);
+	m_spriteRender->Init(L"Assets/sprite/winkari.dds", 150, 250);
 	CVector3 cursorpos = m_gamecursor->GetCursor();
 	m_position = cursorpos;
 	m_spriteRender->SetPosition(m_position);			//カーソルの座標
@@ -59,23 +59,23 @@ bool AIEditNode::Start()
 	//m_spriteRender5->Init(L"Assets/sprite/karipoint.dds", 140, 100, true);
 	//m_spriteRender5->SetPosition(m_pointposition);
 
-	int x = 70;			//ボタンのX座標
-	int y = 240;		//ボタンのY座標
+	int x = 35;			//ボタンのX座標
+	int y = 120;		//ボタンのY座標
 	
 	//ボタン専用
-	for (int i = 0; i < 5; i++)		//iは数を回すだけのハム太郎
+	for (int i = 0; i < button; i++)		//iは数を回すだけのハム太郎  
 	{
 		x *= -1;					
 
 		if (i % 2 == 0)
 		{
-			y -= 100;
+			y -= 50;
 
 		}
 
 		SetPointPos(x,y);
 		SpriteRender* sr = NewGO<SpriteRender>(0, "miniwin");
-		sr->Init(L"Assets/sprite/karipoint.dds", 140, 100, true);
+		sr->Init(L"Assets/sprite/karipoint.dds", 70, 50, true);
 		sr->SetPosition(m_pointposition);
 		m_spriteRenders.push_back(sr);
 		
@@ -98,22 +98,47 @@ void AIEditNode::SetPointPos(int numx, int numy)
 
 }
 
+void AIEditNode::Inequ()
+{
+	if (Mouse::isTrigger(enLeftClick))	//rightクリック
+	{
+		NewGO<AIEditNodeInequ>(0, "Inequality");
+
+		Choice1 = true;
+	}
+
+}
+
 void AIEditNode::Update()
 {
 	CVector3 cursorpos = m_gamecursor->GetCursor();
 
-	//m_spriteRender1->SetCollisionTarget(cursorpos);
-	m_spriteRenders[0]->SetCollisionTarget(cursorpos);
+	for (int i = 0; i < button; i++) {
 
+		m_spriteRenders[i]->SetCollisionTarget(cursorpos);
 
+	}
+	if (Choice1 == false) { //何も選択していないとき
 		if (m_spriteRenders[0]->isCollidingTarget())	//Hpを選択しているか	
 		{
-
-			if (Mouse::isTrigger(enLeftClick))	//右クリック
-				NewGO<AIEditNodeHp>(0, "Hp");
-
+			Inequ();
 		}
-	
+
+		if (m_spriteRenders[1]->isCollidingTarget())	//Mpを選択しているか	
+		{
+			Inequ();
+		}
+
+		if (m_spriteRenders[2]->isCollidingTarget())	//Atkを選択しているか	
+		{
+			Inequ();
+		}
+
+		if (m_spriteRenders[3]->isCollidingTarget())	//Defを選択しているか	
+		{
+			Inequ();
+		}
+	}
 	
 }
 
@@ -127,4 +152,13 @@ void AIEditNode::PostRender()
 	//	m_font.Draw(text, { 0 , 0 });
 	//	m_font.End();
 	//}
+
+
+	//CVector3 pos = m_spriteRender->GetPosition();
+
+	//m_font.Begin();
+	//wchar_t text[256];
+	//swprintf_s(text, L" HP ");
+	//m_font.Draw(text, { pos.x,pos.y });
+	//m_font.End();
 }

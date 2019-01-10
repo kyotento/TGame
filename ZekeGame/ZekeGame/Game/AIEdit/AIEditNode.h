@@ -4,6 +4,7 @@ class GameCursor;
 // THIS IS CAMERA.
 class GameCamera;
 class AIEditNodeHp;
+class AIEditNodeInequ;
 class AIEditNode : public GameObject
 {
 
@@ -15,12 +16,17 @@ public:
 	void Update() override final;
 	void SetPointPos(int numx, int numy);
 	void PostRender() override final;
+	void Inequ();
 
-	
+		
 private:
+
+	int button = 5;
+	bool Choice1 = false;				//‰½‚©‚ð‘I‘ð‚·‚é‚Ætrue‚É‚È‚é
 
 	GameCursor * m_gamecursor;
 	AIEditNodeHp * m_aieditnodehp;
+	AIEditNodeInequ* m_aieditnodeinequ;
 	SpriteRender * m_spriteRender;
 	SpriteRender * m_spriteRender1;
 	SpriteRender * m_spriteRender2;
